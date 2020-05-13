@@ -1,0 +1,207 @@
+define({ "api": [
+  {
+    "type": "get",
+    "url": "/getuserinfo",
+    "title": "获取用户信息",
+    "description": "<p>退出登录</p>",
+    "name": "getuserinfo",
+    "group": "User",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{   \"code\": 200,\n    \"success\" : \"退出成功\",\n    \"result\" :   {\n               \"Id\": 10,\n               \"username\": \"12138\",\n               \"mobile\": \"17681018301\",\n               \"email\": null,\n               \"userhead\": null,\n               \"creacte_time\": 1589348813846,\n               \"update_user\": null,\n           }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/logout"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "routes/api/user.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/login",
+    "title": "用户登录",
+    "description": "<p>用户登录</p>",
+    "name": "login",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "password",
+            "description": "<p>密码</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"code\" : 200,\n    \"success\" : \"登录成功\",\n    \"result\" : {\n               \"Id\": 10,\n               \"username\": \"12138\",\n               \"mobile\": \"17681018301\",\n               \"email\": null,\n               \"userhead\": null,\n               \"creacte_time\": 1589348813846,\n               \"update_user\": null,\n           }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/login"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "routes/api/user.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/logout",
+    "title": "退出登录",
+    "description": "<p>退出登录</p>",
+    "name": "logout",
+    "group": "User",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{   \"code\": 200,\n    \"success\" : \"退出成功\",\n    \"result\" :  null\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/logout"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "routes/api/user.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/regest",
+    "title": "注册",
+    "description": "<p>用户注册</p>",
+    "name": "regest",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>手机号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "password",
+            "description": "<p>密码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "gpass",
+            "description": "<p>重复密码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "codes",
+            "description": "<p>验证码</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{   \"code\": 200,\n    \"success\" : \"注册成功\",\n    \"result\" :  null\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/regest"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "routes/api/user.js",
+    "groupTitle": "User"
+  }
+] });
