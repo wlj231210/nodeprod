@@ -31,19 +31,18 @@ let db = require('../../database/dbConfig');
  */
 router.post('/login', function (req, res, next) {
     try {
-        if (req.body.username !== '' && req.body.password !== '')
-        {
+        if (req.body.username !== '' && req.body.password !== '') {
             let username = req.body.username;
             let password = req.body.password;
             let project = '';
-            let sqlString = 'SELECT * FROM user WHERE  username="' + req.body.username + '" && password="' + req.body.password+'"';
+            let sqlString = 'SELECT * FROM user WHERE  username="' + req.body.username + '" && password="' + req.body.password + '"';
             let connection = db.connection();
-            db.insert(connection, sqlString, project, function (err,userdata) {
+            db.insert(connection, sqlString, project, function (err, userdata) {
                 let data = userdata || [];
                 console.log(err, data)
-                if (err){
+                if (err) {
                     console.log(err)
-                }else if (userdata.length==1){
+                } else if (userdata.length == 1) {
                     req.session.userid = userdata[0].Id;
                     let result = {
                         "Id": userdata[0].Id,
@@ -51,14 +50,15 @@ router.post('/login', function (req, res, next) {
                         "mobile": userdata[0].mobile,
                         "email": userdata[0].email,
                         "userhead": userdata[0].userhead,
-                        "creacte_time": userdata[0].creacte_time,}
+                        "creacte_time": userdata[0].creacte_time,
+                    }
                     res.json({
                         code: '200',
                         success: '登录成功',
                         result: result
                     });
 
-                }else{
+                } else {
                     res.json({
                         code: '400',
                         success: '用户名或密码错误',
@@ -69,7 +69,7 @@ router.post('/login', function (req, res, next) {
             });
             db.close(connection);
             return;
-        }else{
+        } else {
             res.json({
                 code: '400',
                 success: '登录帐号或密码不正确',
@@ -108,7 +108,7 @@ router.post('/login', function (req, res, next) {
  */
 router.get('/getuserinfo', function (req, res) {
     console.log('req:' + req.session.userid);
-    if (req.session.userid){
+    if (req.session.userid) {
         let project = '';
         let sqlString = 'SELECT * FROM user WHERE id=' + req.session.userid;
         let connection = db.connection();
@@ -139,7 +139,7 @@ router.get('/getuserinfo', function (req, res) {
         });
         db.close(connection);
         return;
-    }else{
+    } else {
         res.json({
             code: '400',
             success: '未登录',
