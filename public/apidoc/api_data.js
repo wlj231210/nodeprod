@@ -21,14 +21,14 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{   \"code\": 200,\n    \"success\" : \"退出成功\",\n    \"result\" :   {\n               \"Id\": 10,\n               \"username\": \"12138\",\n               \"mobile\": \"17681018301\",\n               \"email\": null,\n               \"userhead\": null,\n               \"creacte_time\": 1589348813846,\n               \"update_user\": null,\n           }\n}",
+          "content": "{   \"code\": 200,\n    \"success\" : \"success\",\n    \"result\" :   {\n               \"Id\": 10,\n               \"username\": \"12138\",\n               \"mobile\": \"17681018301\",\n               \"email\": null,\n               \"userhead\": null,\n               \"creacte_time\": 1589348813846,\n               \"update_user\": null,\n           }\n}",
           "type": "json"
         }
       ]
     },
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/logout"
+        "url": "http://api.wanglijian.top:10000/getuserinfo"
       }
     ],
     "version": "1.0.0",
@@ -84,7 +84,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/login"
+        "url": "http://api.wanglijian.top:10000/login"
       }
     ],
     "version": "1.0.0",
@@ -120,7 +120,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/logout"
+        "url": "http://api.wanglijian.top:10000/logout"
       }
     ],
     "version": "1.0.0",
@@ -197,7 +197,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/regest"
+        "url": "http://api.wanglijian.top:10000/regest"
       }
     ],
     "version": "1.0.0",

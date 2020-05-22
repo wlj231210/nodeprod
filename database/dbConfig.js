@@ -6,8 +6,8 @@ let db = {};
 //插入操作，注意使用异步返回查询结果
 db.insert = function (connection, sql, paras, callback) {
     connection.query(sql, paras, function (error, results, fields) {
-        if (error) throw error;
-        callback(results);//返回插入的id
+        // if (error) throw error;
+        callback(error,results);//返回插入的id
     });
 }
 
@@ -28,7 +28,7 @@ db.connection = function () {
     let connection = mysql.createConnection({
         host: '127.0.0.1',
         user: 'root',
-        password: 'root',
+        password: 'wlj0818.',
         database: 'php_a',
         post: 3306
     });

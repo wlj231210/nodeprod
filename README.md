@@ -27,3 +27,6 @@
     命令
     apidoc -i routes/ -o public/apidoc/
     编译api文档
+
+四. node error log 错误log信息
+    log4js

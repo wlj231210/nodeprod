@@ -26,7 +26,7 @@ let db = require('../../database/dbConfig');
                 "update_user": null,
             }
  *  }
- * @apiSampleRequest http://localhost:4000/login
+ * @apiSampleRequest http://api.wanglijian.top:10000/login
  * @apiVersion 1.0.0
  */
 router.post('/login', function (req, res, next) {
@@ -35,26 +35,27 @@ router.post('/login', function (req, res, next) {
         {
             let username = req.body.username;
             let password = req.body.password;
-            let project = {username:req.body.username,password:req.body.password};
-            let sqlString = 'SELECT * FROM user WHERE username=' + req.body.username + '&& password=' + req.body.password;
+            let project = '';
+            let sqlString = 'SELECT * FROM user WHERE  username="' + req.body.username + '" && password="' + req.body.password+'"';
             let connection = db.connection();
-            db.insert(connection, sqlString, project, function (userdata) {
-                console.log('req:' + req.session);
-                if (userdata.length==1){
-                    req.session.user = userdata;
-                    // req.session.user ='1231';
+            db.insert(connection, sqlString, project, function (err,userdata) {
+                let data = userdata || [];
+                console.log(err, data)
+                if (err){
+                    console.log(err)
+                }else if (userdata.length==1){
+                    req.session.userid = userdata[0].Id;
+                    let result = {
+                        "Id": userdata[0].Id,
+                        "username": userdata[0].username,
+                        "mobile": userdata[0].mobile,
+                        "email": userdata[0].email,
+                        "userhead": userdata[0].userhead,
+                        "creacte_time": userdata[0].creacte_time,}
                     res.json({
                         code: '200',
                         success: '登录成功',
-                        result: {
-
-                            "Id": userdata[0].Id,
-                            "username": userdata[0].username,
-                            "mobile": userdata[0].mobile,
-                            "email": userdata[0].email,
-                            "userhead": userdata[0].userhead,
-                            "creacte_time": userdata[0].creacte_time,
-                        }
+                        result: result
                     });
 
                 }else{
@@ -91,7 +92,7 @@ router.post('/login', function (req, res, next) {
  * @apiSuccess {json} result
  * @apiSuccessExample {json} Success-Response:
  *  {   "code": 200,
- *      "success" : "退出成功",
+ *      "success" : "success",
  *      "result" :   {
                 "Id": 10,
                 "username": "12138",
@@ -102,24 +103,42 @@ router.post('/login', function (req, res, next) {
                 "update_user": null,
             }
  *  }
- * @apiSampleRequest http://localhost:4000/logout
+ * @apiSampleRequest http://api.wanglijian.top:10000/getuserinfo
  * @apiVersion 1.0.0
  */
-router.get('/logout', function (req, res) {
-    if (req.session.user){
-        res.json({
-            code: '200',
-            success: '登录成功',
-            result: {
+router.get('/getuserinfo', function (req, res) {
+    console.log('req:' + req.session.userid);
+    if (req.session.userid){
+        let project = '';
+        let sqlString = 'SELECT * FROM user WHERE id=' + req.session.userid;
+        let connection = db.connection();
+        db.insert(connection, sqlString, project, function (userdata) {
+            if (userdata.length == 1) {
+                let result = {
+                    "Id": userdata[0].Id,
+                    "username": userdata[0].username,
+                    "mobile": userdata[0].mobile,
+                    "email": userdata[0].email,
+                    "userhead": userdata[0].userhead,
+                    "creacte_time": userdata[0].creacte_time,
+                }
+                res.json({
+                    code: '200',
+                    success: 'success',
+                    result: result
+                });
 
-                "Id": userdata[0].Id,
-                "username": userdata[0].username,
-                "mobile": userdata[0].mobile,
-                "email": userdata[0].email,
-                "userhead": userdata[0].userhead,
-                "creacte_time": userdata[0].creacte_time,
+            } else {
+                res.json({
+                    code: '400',
+                    success: '获取用户信息出错',
+                    result: null
+                });
             }
+
         });
+        db.close(connection);
+        return;
     }else{
         res.json({
             code: '400',
@@ -127,7 +146,6 @@ router.get('/logout', function (req, res) {
             result: null
         });
     }
-    res.redirect('index');
 });
 
 /**
@@ -146,7 +164,7 @@ router.get('/logout', function (req, res) {
  *      "success" : "注册成功",
  *      "result" :  null
  *  }
- * @apiSampleRequest http://localhost:4000/regest
+ * @apiSampleRequest http://api.wanglijian.top:10000/regest
  * @apiVersion 1.0.0
  */
 router.post('/regest', function (req, res, next) {
@@ -221,12 +239,17 @@ router.post('/regest', function (req, res, next) {
  *      "success" : "退出成功",
  *      "result" :  null
  *  }
- * @apiSampleRequest http://localhost:4000/logout
+ * @apiSampleRequest http://api.wanglijian.top:10000/logout
  * @apiVersion 1.0.0
  */
 router.get('/logout', function (req, res) {
-    req.session.user = null;
+    req.session.userid = null;
     req.session.error = null;
-    res.redirect('index');
+    res.json({
+        code: '200',
+        success: '退出登录',
+        result: null
+    });
+
 });
 module.exports = router;
