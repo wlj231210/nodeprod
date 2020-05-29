@@ -3,7 +3,6 @@ let router = express.Router();
 let db = require('../../database/dbConfig');
 
 
-
 /**
  * @api {post} /login 用户登录
  * @apiDescription 用户登录
@@ -15,8 +14,8 @@ let db = require('../../database/dbConfig');
  * @apiSuccessExample {json} Success-Response:
  *  {
  *      "code" : 200,
- *      "success" : "登录成功",
- *      "result" : {
+ *      "message" : "登录成功",
+ *      "dataMap" : {
                 "Id": 10,
                 "username": "12138",
                 "mobile": "17681018301",
@@ -27,7 +26,6 @@ let db = require('../../database/dbConfig');
             }
  *  }
  * @apiSampleRequest /login
- * @apiVersion 1.0.0
  */
 router.post('/login', function (req, res, next) {
     try {
@@ -36,7 +34,7 @@ router.post('/login', function (req, res, next) {
             let username = req.body.username;
             let password = req.body.password;
             let project = '';
-            let sqlString = 'SELECT * FROM user WHERE  username="' + req.body.username + '" && password="' + req.body.password+'"';
+            let sqlString = 'SELECT * FROM user WHERE  username="' + req.body.username + '" || mobile="' + req.body.username + '" && password="' + req.body.password+'"';
             let connection = db.connection();
             db.insert(connection, sqlString, project, function (err,userdata) {
                 let data = userdata || [];
@@ -53,16 +51,16 @@ router.post('/login', function (req, res, next) {
                         "userhead": userdata[0].userhead,
                         "creacte_time": userdata[0].creacte_time,}
                     res.json({
-                        code: '200',
-                        success: '登录成功',
-                        result: result
+                        code: 200,
+                        message: '登录成功',
+                        dataMap: result
                     });
 
                 }else{
                     res.json({
-                        code: '400',
-                        success: '用户名或密码错误',
-                        result: null
+                        code: 400,
+                        message: '用户名或密码错误',
+                        dataMap: null
                     });
                 }
 
@@ -71,29 +69,29 @@ router.post('/login', function (req, res, next) {
             return;
         }else{
             res.json({
-                code: '400',
-                success: '登录帐号或密码不正确',
-                result: null
+                code: 400,
+                message: '登录帐号或密码不正确',
+                dataMap: null
             });
         }
     } catch (error) {
         res.json({
-            code: '400',
-            success: '登录出错啦',
-            result: null
+            code: 400,
+            message: '登录出错啦',
+            dataMap: null
         });
     }
 });
 /**
  * @api {get} /getuserinfo 获取用户信息
- * @apiDescription 退出登录
+ * @apiDescription 获取用户信息
  * @apiName getuserinfo
  * @apiGroup User
  * @apiSuccess {json} result
  * @apiSuccessExample {json} Success-Response:
  *  {   "code": 200,
- *      "success" : "success",
- *      "result" :   {
+ *      "message" : "success",
+ *      "dataMap" :   {
                 "Id": 10,
                 "username": "12138",
                 "mobile": "17681018301",
@@ -104,7 +102,6 @@ router.post('/login', function (req, res, next) {
             }
  *  }
  * @apiSampleRequest /getuserinfo
- * @apiVersion 1.0.0
  */
 router.get('/getuserinfo', function (req, res) {
     console.log('req:' + req.session.userid);
@@ -123,14 +120,14 @@ router.get('/getuserinfo', function (req, res) {
                     "creacte_time": userdata[0].creacte_time,
                 }
                 res.json({
-                    code: '200',
+                    code: 200,
                     success: 'success',
                     result: result
                 });
 
             } else {
                 res.json({
-                    code: '400',
+                    code: 400,
                     success: '获取用户信息出错',
                     result: null
                 });
@@ -141,7 +138,7 @@ router.get('/getuserinfo', function (req, res) {
         return;
     }else{
         res.json({
-            code: '400',
+            code: 400,
             success: '未登录',
             result: null
         });
@@ -165,7 +162,6 @@ router.get('/getuserinfo', function (req, res) {
  *      "result" :  null
  *  }
  * @apiSampleRequest /regest
- * @apiVersion 1.0.0
  */
 router.post('/regest', function (req, res, next) {
     let
@@ -174,7 +170,7 @@ router.post('/regest', function (req, res, next) {
         resPass = req.body.password;
     if (req.body.password == "" || req.body.gpass == "" || req.body.username == "" || req.body.mobile == "") {
         res.json({
-            code: '400',
+            code: 400,
             success: '请求数据不能为空',
             result: null
         });
@@ -183,7 +179,7 @@ router.post('/regest', function (req, res, next) {
     try {
         if (req.body.password !== req.body.gpass) {
             res.json({
-                code: '301',
+                code: 301,
                 success: '重复密码不一致',
                 result: null
             });
@@ -191,7 +187,7 @@ router.post('/regest', function (req, res, next) {
         }
         if (req.body.codes !== '1206') {
             res.json({
-                code: '302',
+                code: 302,
                 success: '验证码不一致',
                 result: null
             });
@@ -221,7 +217,7 @@ router.post('/regest', function (req, res, next) {
 
     } catch (e) {
         res.json({
-            code: '400',
+            code: 400,
             success: '请求出错',
             result: null
         });
@@ -240,13 +236,12 @@ router.post('/regest', function (req, res, next) {
  *      "result" :  null
  *  }
  * @apiSampleRequest /logout
- * @apiVersion 1.0.0
  */
 router.get('/logout', function (req, res) {
     req.session.userid = null;
     req.session.error = null;
     res.json({
-        code: '200',
+        code: 200,
         success: '退出登录',
         result: null
     });

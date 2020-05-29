@@ -53,10 +53,10 @@ var log4js = require("./log");
 app.use(log4js.useLog());
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  log4js.useLog(createError(404))
-  next(createError(404));
-});
+// app.use(function(req, res, next) {
+//   log4js.useLog(createError(404))
+//   next(createError(404));
+// });
 
 // error handler
 app.use(function(err, req, res, next) {

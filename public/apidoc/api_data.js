@@ -3,7 +3,7 @@ define({ "api": [
     "type": "get",
     "url": "/getuserinfo",
     "title": "获取用户信息",
-    "description": "<p>退出登录</p>",
+    "description": "<p>获取用户信息</p>",
     "name": "getuserinfo",
     "group": "User",
     "success": {
@@ -28,10 +28,10 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "http://api.wanglijian.top:10000/getuserinfo"
+        "url": "/getuserinfo"
       }
     ],
-    "version": "1.0.0",
+    "version": "0.0.0",
     "filename": "routes/api/user.js",
     "groupTitle": "User"
   },
@@ -84,10 +84,10 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "http://api.wanglijian.top:10000/login"
+        "url": "/login"
       }
     ],
-    "version": "1.0.0",
+    "version": "0.0.0",
     "filename": "routes/api/user.js",
     "groupTitle": "User"
   },
@@ -120,10 +120,10 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "http://api.wanglijian.top:10000/logout"
+        "url": "/logout"
       }
     ],
-    "version": "1.0.0",
+    "version": "0.0.0",
     "filename": "routes/api/user.js",
     "groupTitle": "User"
   },
@@ -197,10 +197,10 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "http://api.wanglijian.top:10000/regest"
+        "url": "/regest"
       }
     ],
-    "version": "1.0.0",
+    "version": "0.0.0",
     "filename": "routes/api/user.js",
     "groupTitle": "User"
   }

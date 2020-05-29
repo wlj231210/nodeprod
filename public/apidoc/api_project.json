@@ -1,15 +1,15 @@
 {
-  "title": "Custom apiDoc browser title",
-  "url": "http://127.0.0.1:4000",
+  "title": "nodeprod 接口实例",
+  "url": "https://api.wanglijian.top",
   "name": "接口文档",
   "version": "0.0.0",
-  "description": "apiDoc basic example",
+  "description": "接口实例",
   "sampleUrl": false,
   "defaultVersion": "0.0.0",
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2020-05-22T06:24:27.409Z",
+    "time": "2020-05-29T01:52:57.363Z",
     "url": "http://apidocjs.com",
     "version": "0.22.1"
   }
